@@ -1,0 +1,5403 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "eBird API 2.0",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.ebird.org/v2/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-eBirdApiToken"
+      }
+    },
+    "schemas": {
+      "observation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "speciesCode": {
+            "type": "string"
+          },
+          "comName": {
+            "type": "string"
+          },
+          "sciName": {
+            "type": "string"
+          },
+          "locId": {
+            "type": "string"
+          },
+          "locName": {
+            "type": "string"
+          },
+          "obsDt": {
+            "type": "string"
+          },
+          "howMany": {
+            "type": "integer"
+          },
+          "lat": {
+            "type": "number",
+            "format": "float"
+          },
+          "lng": {
+            "type": "number",
+            "format": "float"
+          },
+          "obsValid": {
+            "type": "boolean"
+          },
+          "obsReviewed": {
+            "type": "boolean"
+          },
+          "locationPrivate": {
+            "type": "boolean"
+          },
+          "subId": {
+            "type": "string"
+          }
+        }
+      },
+      "observationArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/observation"
+        }
+      },
+      "checklistObservation": {
+        "type": "object",
+        "properties": {
+          "speciesCode": {
+            "type": "string"
+          },
+          "obsDt": {
+            "type": "string"
+          },
+          "obsId": {
+            "type": "string"
+          },
+          "obsAux": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "subId": {
+                  "type": "string"
+                },
+                "obsId": {
+                  "type": "string"
+                },
+                "speciesCode": {
+                  "type": "string"
+                },
+                "fieldName": {
+                  "type": "string"
+                },
+                "entryMethodCode": {
+                  "type": "string"
+                },
+                "auxCode": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "checklist": {
+        "type": "object",
+        "properties": {
+          "locId": {
+            "type": "string"
+          },
+          "subId": {
+            "type": "string"
+          },
+          "userDisplayName": {
+            "type": "string"
+          },
+          "numSpecies": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "obsDt": {
+            "type": "string"
+          },
+          "obsTime": {
+            "type": "string"
+          },
+          "isoObsDate": {
+            "type": "string"
+          },
+          "projId": {
+            "type": "string"
+          },
+          "protocolId": {
+            "type": "string"
+          },
+          "durationHrs": {
+            "type": "number"
+          },
+          "allObsReported": {
+            "type": "boolean"
+          },
+          "creationDt": {
+            "type": "string"
+          },
+          "lastEditedDt": {
+            "type": "string"
+          },
+          "obsTimeValid": {
+            "type": "boolean"
+          },
+          "checklistId": {
+            "type": "string"
+          },
+          "numObservers": {
+            "type": "integer"
+          },
+          "subnational1Code": {
+            "type": "string"
+          },
+          "submissionMethodCode": {
+            "type": "string"
+          },
+          "loc": {
+            "$ref": "#/components/schemas/location"
+          },
+          "obs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/checklistObservation"
+            }
+          }
+        }
+      },
+      "checklistArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/checklist"
+        }
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "locId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "subnational1Name": {
+            "type": "string"
+          },
+          "subnational1Code": {
+            "type": "string"
+          },
+          "isHotspot": {
+            "type": "boolean"
+          },
+          "locName": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "hierarchicalName": {
+            "type": "string"
+          }
+        }
+      },
+      "top100": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "profileHandle": {
+              "type": "string"
+            },
+            "userDisplayName": {
+              "type": "string"
+            },
+            "numSpecies": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "numCompleteChecklists": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "rowNum": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "userId": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "regionalStats": {
+        "type": "object",
+        "properties": {
+          "numChecklists": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numContributors": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numSpecies": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "hotspot": {
+        "type": "object",
+        "properties": {
+          "locId": {
+            "type": "string"
+          },
+          "locName": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "subnational1Code": {
+            "type": "string"
+          },
+          "subnational2Code": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "latestObsDt": {
+            "type": "string"
+          },
+          "numSpeciesAllTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "hotspotArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/hotspot"
+        }
+      },
+      "ebirdTaxonomy": {
+        "type": "object",
+        "properties": {
+          "sciName": {
+            "type": "string"
+          },
+          "comName": {
+            "type": "string"
+          },
+          "speciesCode": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "taxonOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bandingCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comNameCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sciNameCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "order": {
+            "type": "string"
+          },
+          "familyCode": {
+            "type": "string"
+          },
+          "familyComName": {
+            "type": "string"
+          },
+          "familySciName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "APIKeyHeader": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "data/obs",
+      "description": "The data/obs end-points are used to fetch observations submitted to eBird in checklists. There are two categories of end-point: 1. Fetch observations for a specific country, region or location. 2. Fetch observations for nearby locations - up to a distance of 50km. Each end-point supports optional query parameters which allow you to filter the list of observations returned."
+    },
+    {
+      "name": "product",
+      "description": "The product end-points make it easy to get the information shown in various pages on the eBird web site: 1. The Top 100 contributors on a given date. 2. The checklists submitted on a given date. 3. The most recent checklists submitted. 4. A summary of the checklists submitted on a given date. 5. The details and all the observations of a checklist."
+    },
+    {
+      "name": "ref/geo",
+      "description": "With the ref/geo end-point you can find a country's or region's neighbours."
+    },
+    {
+      "name": "ref/hotspot",
+      "description": "With the ref/hotspot end-points you can find the hotspots for a given country or region or nearby hotspots"
+    },
+    {
+      "name": "ref/taxonomy"
+    },
+    {
+      "name": "ref/region",
+      "description": "The ref/region end-points return information on regions."
+    }
+  ],
+  "paths": {
+    "/data/obs/{regionCode}/recent": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent observations in a region",
+        "description": "Get the list of recent observations (up to 30 days ago) of birds seen\nin a country, state, county, or location. Results include only the most recent observation for each species in the region specified.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "cat",
+            "description": "Only fetch observations from these taxonomic categories",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "species",
+                "slash",
+                "issf",
+                "spuh",
+                "hybrid",
+                "domestic",
+                "form",
+                "intergrade"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed"
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "r",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 10
+            },
+            "description": "Fetch observations from up to 10 locations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                },
+                "example": [
+                  {
+                    "speciesCode": "hoocro1",
+                    "comName": "Hooded Crow",
+                    "sciName": "Corvus cornix",
+                    "locId": "L7884500",
+                    "locName": "\u0443\u043b\u0438\u0446\u0430 \u0421\u0442\u0430\u0440\u0438\u043a\u043e\u0432\u0430, Chundzha KZ-Almaty (43.5309,79.4551)",
+                    "obsDt": "2020-01-21 16:35",
+                    "howMany": 1,
+                    "lat": 43.530936,
+                    "lng": 79.455132,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63619695"
+                  },
+                  {
+                    "speciesCode": "bohwax",
+                    "comName": "Bohemian Waxwing",
+                    "sciName": "Bombycilla garrulus",
+                    "locId": "L7884500",
+                    "locName": "\u0443\u043b\u0438\u0446\u0430 \u0421\u0442\u0430\u0440\u0438\u043a\u043e\u0432\u0430, Chundzha KZ-Almaty (43.5309,79.4551)",
+                    "obsDt": "2020-01-21 16:35",
+                    "howMany": 16,
+                    "lat": 43.530936,
+                    "lng": 79.455132,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63619695"
+                  },
+                  {
+                    "speciesCode": "eutspa",
+                    "comName": "Eurasian Tree Sparrow",
+                    "sciName": "Passer montanus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-21 09:03",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63615092"
+                  },
+                  {
+                    "speciesCode": "houspa",
+                    "comName": "House Sparrow",
+                    "sciName": "Passer domesticus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-21 09:03",
+                    "howMany": 2,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63615092"
+                  },
+                  {
+                    "speciesCode": "gretit1",
+                    "comName": "Great Tit",
+                    "sciName": "Parus major",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 16,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "eurmag1",
+                    "comName": "Eurasian Magpie",
+                    "sciName": "Pica pica",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 4,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "carcro1",
+                    "comName": "Carrion Crow",
+                    "sciName": "Corvus corone",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 3,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "azutit2",
+                    "comName": "Azure Tit",
+                    "sciName": "Cyanistes cyanus",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 4,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "eurbla",
+                    "comName": "Eurasian Blackbird",
+                    "sciName": "Turdus merula",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 2,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "eurgol",
+                    "comName": "European Goldfinch",
+                    "sciName": "Carduelis carduelis",
+                    "locId": "L9840246",
+                    "locName": "Shybynsay",
+                    "obsDt": "2020-01-21 09:00",
+                    "howMany": 20,
+                    "lat": 43.198302,
+                    "lng": 77.040023,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617298"
+                  },
+                  {
+                    "speciesCode": "comcha",
+                    "comName": "Common Chaffinch",
+                    "sciName": "Fringilla coelebs",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-20 18:11",
+                    "howMany": 2,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63582245"
+                  },
+                  {
+                    "speciesCode": "datthr1",
+                    "comName": "Black-throated Thrush",
+                    "sciName": "Turdus atrogularis",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-20 18:11",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63582245"
+                  },
+                  {
+                    "speciesCode": "rocpig",
+                    "comName": "Rock Pigeon",
+                    "sciName": "Columba livia",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-20 13:03",
+                    "howMany": 40,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63579583"
+                  },
+                  {
+                    "speciesCode": "commyn",
+                    "comName": "Common Myna",
+                    "sciName": "Acridotheres tristis",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-20 13:03",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63579583"
+                  },
+                  {
+                    "speciesCode": "turdus1",
+                    "comName": "Turdus sp.",
+                    "sciName": "Turdus sp.",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-19 16:45",
+                    "howMany": 7,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63543146"
+                  },
+                  {
+                    "speciesCode": "brambl",
+                    "comName": "Brambling",
+                    "sciName": "Fringilla montifringilla",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-19 16:45",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63543146"
+                  },
+                  {
+                    "speciesCode": "whoswa",
+                    "comName": "Whooper Swan",
+                    "sciName": "Cygnus cygnus",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-19 10:07",
+                    "howMany": 2,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63537519"
+                  },
+                  {
+                    "speciesCode": "mutswa",
+                    "comName": "Mute Swan",
+                    "sciName": "Cygnus olor",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-19 10:07",
+                    "howMany": 4,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63537519"
+                  },
+                  {
+                    "speciesCode": "skylar",
+                    "comName": "Eurasian Skylark",
+                    "sciName": "Alauda arvensis",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-19 10:07",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63537519"
+                  },
+                  {
+                    "speciesCode": "lotros1",
+                    "comName": "Long-tailed Rosefinch",
+                    "sciName": "Carpodacus sibiricus",
+                    "locId": "L2384349",
+                    "locName": "Tengiz--West Evaporation Ponds (restricted access)",
+                    "obsDt": "2020-01-19 09:27",
+                    "howMany": 13,
+                    "lat": 46.315,
+                    "lng": 53.4208333,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63536762"
+                  },
+                  {
+                    "speciesCode": "bearee1",
+                    "comName": "Bearded Reedling",
+                    "sciName": "Panurus biarmicus",
+                    "locId": "L2384349",
+                    "locName": "Tengiz--West Evaporation Ponds (restricted access)",
+                    "obsDt": "2020-01-19 09:27",
+                    "howMany": 5,
+                    "lat": 46.315,
+                    "lng": 53.4208333,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63536762"
+                  },
+                  {
+                    "speciesCode": "euptit1",
+                    "comName": "Eurasian Penduline-Tit",
+                    "sciName": "Remiz pendulinus",
+                    "locId": "L2384349",
+                    "locName": "Tengiz--West Evaporation Ponds (restricted access)",
+                    "obsDt": "2020-01-19 09:27",
+                    "howMany": 1,
+                    "lat": 46.315,
+                    "lng": 53.4208333,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63536762"
+                  },
+                  {
+                    "speciesCode": "norhar1",
+                    "comName": "Hen Harrier",
+                    "sciName": "Circus cyaneus",
+                    "locId": "L2384349",
+                    "locName": "Tengiz--West Evaporation Ponds (restricted access)",
+                    "obsDt": "2020-01-19 09:27",
+                    "howMany": 1,
+                    "lat": 46.315,
+                    "lng": 53.4208333,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63536762"
+                  },
+                  {
+                    "speciesCode": "fieldf",
+                    "comName": "Fieldfare",
+                    "sciName": "Turdus pilaris",
+                    "locId": "L9878093",
+                    "locName": "Frog Pond",
+                    "obsDt": "2020-01-18 15:00",
+                    "howMany": 3,
+                    "lat": 43.526353,
+                    "lng": 79.439873,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63501868"
+                  },
+                  {
+                    "speciesCode": "mallar3",
+                    "comName": "Mallard",
+                    "sciName": "Anas platyrhynchos",
+                    "locId": "L9878093",
+                    "locName": "Frog Pond",
+                    "obsDt": "2020-01-18 15:00",
+                    "howMany": 2,
+                    "lat": 43.526353,
+                    "lng": 79.439873,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63501868"
+                  },
+                  {
+                    "speciesCode": "rinphe",
+                    "comName": "Ring-necked Pheasant",
+                    "sciName": "Phasianus colchicus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-18 10:10",
+                    "howMany": 7,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63499659"
+                  },
+                  {
+                    "speciesCode": "rook1",
+                    "comName": "Rook",
+                    "sciName": "Corvus frugilegus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-18 10:10",
+                    "howMany": 12,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63499659"
+                  },
+                  {
+                    "speciesCode": "eurgre1",
+                    "comName": "European Greenfinch",
+                    "sciName": "Chloris chloris",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-18 10:10",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63499659"
+                  },
+                  {
+                    "speciesCode": "eucdov",
+                    "comName": "Eurasian Collared-Dove",
+                    "sciName": "Streptopelia decaocto",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-18 10:10",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63499659"
+                  },
+                  {
+                    "speciesCode": "eurjac",
+                    "comName": "Eurasian Jackdaw",
+                    "sciName": "Corvus monedula",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-18 10:10",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63499659"
+                  },
+                  {
+                    "speciesCode": "eurkes",
+                    "comName": "Eurasian Kestrel",
+                    "sciName": "Falco tinnunculus",
+                    "locId": "L10506840",
+                    "locName": "Unnamed Road, \u041a\u044b\u0437\u044b\u043b\u0448\u0430\u0440\u044b\u043a, Almat\u0131 obl\u0131s\u0131, KZ (43.528, 78.292)",
+                    "obsDt": "2020-01-18 09:57",
+                    "howMany": 1,
+                    "lat": 43.5275029,
+                    "lng": 78.2918487,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63499205"
+                  },
+                  {
+                    "speciesCode": "eurspa1",
+                    "comName": "Eurasian Sparrowhawk",
+                    "sciName": "Accipiter nisus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-17 18:14",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63469899"
+                  },
+                  {
+                    "speciesCode": "crelar2",
+                    "comName": "Crested Lark",
+                    "sciName": "Galerida cristata",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-17 18:14",
+                    "howMany": 2,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63469899"
+                  },
+                  {
+                    "speciesCode": "eurrob1",
+                    "comName": "European Robin",
+                    "sciName": "Erithacus rubecula",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-17 14:26",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": true,
+                    "locationPrivate": false,
+                    "subId": "S63468052"
+                  },
+                  {
+                    "speciesCode": "norgos",
+                    "comName": "Northern Goshawk",
+                    "sciName": "Accipiter gentilis",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-12 14:46",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63302867"
+                  },
+                  {
+                    "speciesCode": "hawfin",
+                    "comName": "Hawfinch",
+                    "sciName": "Coccothraustes coccothraustes",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-12 14:46",
+                    "howMany": 1,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false,
+                    "subId": "S63302867"
+                  },
+                  {
+                    "speciesCode": "misthr1",
+                    "comName": "Mistle Thrush",
+                    "sciName": "Turdus viscivorus",
+                    "locId": "L10233102",
+                    "locName": "Ahmet Yesevi University",
+                    "obsDt": "2020-01-12 14:46",
+                    "howMany": 10,
+                    "lat": 43.2995121,
+                    "lng": 68.3065226,
+                    "obsValid": true,
+                    "obsReviewed": true,
+                    "locationPrivate": false,
+                    "subId": "S63302867"
+                  },
+                  {
+                    "speciesCode": "eurlin1",
+                    "comName": "Eurasian Linnet",
+                    "sciName": "Linaria cannabina",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "lottit1",
+                    "comName": "Long-tailed Tit",
+                    "sciName": "Aegithalos caudatus",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "mewgul",
+                    "comName": "Mew Gull",
+                    "sciName": "Larus canus",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "reebun",
+                    "comName": "Reed Bunting",
+                    "sciName": "Emberiza schoeniclus",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 10,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": true,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "compoc",
+                    "comName": "Common Pochard",
+                    "sciName": "Aythya ferina",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "whiwag",
+                    "comName": "White Wagtail",
+                    "sciName": "Motacilla alba",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": true,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "blutit",
+                    "comName": "Eurasian Blue Tit",
+                    "sciName": "Cyanistes caeruleus",
+                    "locId": "L10327610",
+                    "locName": "Evaporation ponds (TCO sewage treatment facility ), South Tengiz",
+                    "obsDt": "2020-01-12 09:42",
+                    "howMany": 1,
+                    "lat": 46.272928,
+                    "lng": 53.3983947,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63300178"
+                  },
+                  {
+                    "speciesCode": "rubred2",
+                    "comName": "Rufous-backed Redstart",
+                    "sciName": "Phoenicurus erythronotus",
+                    "locId": "L10469106",
+                    "locName": "KZ-Almaty-Chundzha (43.5288,79.4623)",
+                    "obsDt": "2020-01-11 16:00",
+                    "howMany": 1,
+                    "lat": 43.528777,
+                    "lng": 79.462334,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63260593"
+                  },
+                  {
+                    "speciesCode": "litgre1",
+                    "comName": "Little Grebe",
+                    "sciName": "Tachybaptus ruficollis",
+                    "locId": "L8433050",
+                    "locName": "Starikova Pond",
+                    "obsDt": "2020-01-10 14:30",
+                    "howMany": 1,
+                    "lat": 43.5303491,
+                    "lng": 79.4624284,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63347368"
+                  },
+                  {
+                    "speciesCode": "whwwoo1",
+                    "comName": "White-winged Woodpecker",
+                    "sciName": "Dendrocopos leucopterus",
+                    "locId": "L10526663",
+                    "locName": "Akdala",
+                    "obsDt": "2020-01-09 10:38",
+                    "howMany": 1,
+                    "lat": 44.5396194,
+                    "lng": 76.6254182,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63617087"
+                  },
+                  {
+                    "speciesCode": "grypar",
+                    "comName": "Gray Partridge",
+                    "sciName": "Perdix perdix",
+                    "locId": "L10526618",
+                    "locName": "Kurty",
+                    "obsDt": "2020-01-08 17:11",
+                    "howMany": 2,
+                    "lat": 44.262725,
+                    "lng": 76.6617496,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616832"
+                  },
+                  {
+                    "speciesCode": "eurnut1",
+                    "comName": "Eurasian Nutcracker",
+                    "sciName": "Nucifraga caryocatactes",
+                    "locId": "L7884500",
+                    "locName": "\u0443\u043b\u0438\u0446\u0430 \u0421\u0442\u0430\u0440\u0438\u043a\u043e\u0432\u0430, Chundzha KZ-Almaty (43.5309,79.4551)",
+                    "obsDt": "2020-01-08 14:30",
+                    "howMany": 1,
+                    "lat": 43.530936,
+                    "lng": 79.455132,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63158588"
+                  },
+                  {
+                    "speciesCode": "y00764",
+                    "comName": "House/Eurasian Tree Sparrow",
+                    "sciName": "Passer domesticus/montanus",
+                    "locId": "L7884500",
+                    "locName": "\u0443\u043b\u0438\u0446\u0430 \u0421\u0442\u0430\u0440\u0438\u043a\u043e\u0432\u0430, Chundzha KZ-Almaty (43.5309,79.4551)",
+                    "obsDt": "2020-01-08 14:30",
+                    "howMany": 15,
+                    "lat": 43.530936,
+                    "lng": 79.455132,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63158588"
+                  },
+                  {
+                    "speciesCode": "chukar",
+                    "comName": "Chukar",
+                    "sciName": "Alectoris chukar",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 8,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  },
+                  {
+                    "speciesCode": "comred",
+                    "comName": "Common Redpoll",
+                    "sciName": "Acanthis flammea",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 20,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  },
+                  {
+                    "speciesCode": "merlin",
+                    "comName": "Merlin",
+                    "sciName": "Falco columbarius",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 1,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  },
+                  {
+                    "speciesCode": "corbun1",
+                    "comName": "Corn Bunting",
+                    "sciName": "Emberiza calandra",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 6,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  },
+                  {
+                    "speciesCode": "horlar",
+                    "comName": "Horned Lark",
+                    "sciName": "Eremophila alpestris",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 20,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  },
+                  {
+                    "speciesCode": "whteag",
+                    "comName": "White-tailed Eagle",
+                    "sciName": "Haliaeetus albicilla",
+                    "locId": "L10526629",
+                    "locName": "Ili",
+                    "obsDt": "2020-01-08 14:00",
+                    "howMany": 1,
+                    "lat": 44.3978758,
+                    "lng": 76.655232,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true,
+                    "subId": "S63616972"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/{regionCode}/recent/notable": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent notable observations in a region",
+        "description": "Get the list of recent, notable observations (up to 30 days ago) of birds seen in a country, region or location. Notable observations can be for locally or nationally rare species or are otherwise unusual, e.g. over-wintering birds in a species which is normally only a summer visitor.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "detail",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "full"
+              ],
+              "default": "simple"
+            },
+            "description": "Include a subset (simple), or all (full), of the fields available."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "r",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 10
+            },
+            "description": "Fetch observations from up to 10 locations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Full Detail",
+                    "value": [
+                      {
+                        "speciesCode": "libher",
+                        "comName": "Little Blue Heron",
+                        "sciName": "Egretta caerulea",
+                        "locId": "L295658",
+                        "locName": "Wallkill River NWR--Liberty Marsh (NY)",
+                        "obsDt": "2017-08-23 10:11",
+                        "howMany": 1,
+                        "lat": 41.2833266,
+                        "lng": -74.5262526,
+                        "obsValid": false,
+                        "obsReviewed": false,
+                        "locationPrivate": false,
+                        "subnational2Code": "US-NY-071",
+                        "subnational2Name": "Orange",
+                        "subnational1Code": "US-NY",
+                        "subnational1Name": "New York",
+                        "countryCode": "US",
+                        "countryName": "United States",
+                        "userDisplayName": "Kathleen Ashman",
+                        "subId": "S38783126",
+                        "obsId": "OBS527233428",
+                        "checklistId": "CL22364",
+                        "presenceNoted": false,
+                        "hasComments": false,
+                        "firstName": "Kathleen",
+                        "lastName": "Astahman",
+                        "hasRichMedia": false
+                      },
+                      {
+                        "speciesCode": "larspa",
+                        "comName": "Lark Sparrow",
+                        "sciName": "Chondestes grammacus",
+                        "locId": "L109147",
+                        "locName": "Jones Beach SP--West End",
+                        "obsDt": "2017-08-23 10:00",
+                        "howMany": 1,
+                        "lat": 40.5786111,
+                        "lng": -73.5727778,
+                        "obsValid": true,
+                        "obsReviewed": true,
+                        "locationPrivate": false,
+                        "subnational2Code": "US-NY-059",
+                        "subnational2Name": "Nassau",
+                        "subnational1Code": "US-NY",
+                        "subnational1Name": "New York",
+                        "countryCode": "US",
+                        "countryName": "United States",
+                        "userDisplayName": "Stacy Meyerheinrich",
+                        "subId": "S38780649",
+                        "obsId": "OBS527201666",
+                        "checklistId": "CL22361",
+                        "presenceNoted": false,
+                        "hasComments": false,
+                        "firstName": "Stacy",
+                        "lastName": "Moyerhainrich",
+                        "hasRichMedia": false
+                      },
+                      {
+                        "speciesCode": "libher",
+                        "comName": "Little Blue Heron",
+                        "sciName": "Egretta caerulea",
+                        "locId": "L295658",
+                        "locName": "Wallkill River NWR--Liberty Marsh (NY)",
+                        "obsDt": "2017-08-23 09:00",
+                        "howMany": 1,
+                        "lat": 41.2833266,
+                        "lng": -74.5262526,
+                        "obsValid": false,
+                        "obsReviewed": false,
+                        "locationPrivate": false,
+                        "subnational2Code": "US-NY-071",
+                        "subnational2Name": "Orange",
+                        "subnational1Code": "US-NY",
+                        "subnational1Name": "New York",
+                        "countryCode": "US",
+                        "countryName": "United States",
+                        "userDisplayName": "clay spencer",
+                        "subId": "S38779435",
+                        "obsId": "OBS527186633",
+                        "checklistId": "CL22364",
+                        "presenceNoted": false,
+                        "hasComments": false,
+                        "firstName": "clay",
+                        "lastName": "spencer",
+                        "hasRichMedia": false
+                      }
+                    ]
+                  },
+                  "example-1": {
+                    "summary": "Simple Detail",
+                    "value": [
+                      {
+                        "speciesCode": "libher",
+                        "comName": "Little Blue Heron",
+                        "sciName": "Egretta caerulea",
+                        "locId": "L295658",
+                        "locName": "Wallkill River NWR--Liberty Marsh (NY)",
+                        "obsDt": "2017-08-23 10:11",
+                        "howMany": 1,
+                        "lat": 41.2833266,
+                        "lng": -74.5262526,
+                        "obsValid": false,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "larspa",
+                        "comName": "Lark Sparrow",
+                        "sciName": "Chondestes grammacus",
+                        "locId": "L109147",
+                        "locName": "Jones Beach SP--West End",
+                        "obsDt": "2017-08-23 10:00",
+                        "howMany": 1,
+                        "lat": 40.5786111,
+                        "lng": -73.5727778,
+                        "obsValid": true,
+                        "obsReviewed": true,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "libher",
+                        "comName": "Little Blue Heron",
+                        "sciName": "Egretta caerulea",
+                        "locId": "L295658",
+                        "locName": "Wallkill River NWR--Liberty Marsh (NY)",
+                        "obsDt": "2017-08-23 09:00",
+                        "howMany": 1,
+                        "lat": 41.2833266,
+                        "lng": -74.5262526,
+                        "obsValid": false,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "uplsan",
+                        "comName": "Upland Sandpiper",
+                        "sciName": "Bartramia longicauda",
+                        "locId": "L5679821",
+                        "locName": "Lower Lake Rd. X Burgess Rd. fields",
+                        "obsDt": "2017-08-23 08:41",
+                        "howMany": 1,
+                        "lat": 43.3669587,
+                        "lng": -78.5057044,
+                        "obsValid": false,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/{regionCode}/recent/{speciesCode}": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent observations of a species in a region",
+        "description": "Get the recent observations, up to 30 days ago, of a particular species\nin a country, region or location. Results include only the most recent observation from each location in the region specified.\n#### Notes\n\nThe species code is typically a 6-letter code, e.g. cangoo for Canada Goose. You can\nget complete set of species code from the GET eBird Taxonomy end-point.\n\nWhen using the *r* query parameter set the *regionCode* URL parameter to an empty string.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "name": "speciesCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The eBird species code."
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "r",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 10
+            },
+            "description": "Fetch observations from up to 10 locations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                },
+                "example": [
+                  {
+                    "speciesCode": "cangoo",
+                    "comName": "Canada Goose",
+                    "sciName": "Branta canadensis",
+                    "locId": "L1150539",
+                    "locName": "Hanshaw Rd. fields",
+                    "obsDt": "2017-08-23 20:05",
+                    "howMany": 30,
+                    "lat": 42.4663513,
+                    "lng": -76.4531064,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": false
+                  },
+                  {
+                    "speciesCode": "cangoo",
+                    "comName": "Canada Goose",
+                    "sciName": "Branta canadensis",
+                    "locId": "L6208778",
+                    "locName": "169 Locust Ln, Richfield US-NY (42.8366,-75.0028)",
+                    "obsDt": "2017-08-23 19:45",
+                    "howMany": 13,
+                    "lat": 42.83663,
+                    "lng": -75.002794,
+                    "obsValid": true,
+                    "obsReviewed": false,
+                    "locationPrivate": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/geo/recent": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent nearby observations",
+        "description": "Get the list of recent observations (up to 30 days ago) of birds seen\nat locations within a radius of up to 50 kilometers, from a given set\nof coordinates. Results include only the most recent observation for each species in the region specified.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 90,
+              "minimum": -90
+            },
+            "required": true,
+            "example": 40.77
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 180,
+              "minimum": -180
+            },
+            "required": true,
+            "example": 73.96
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "cat",
+            "description": "Only fetch observations from these taxonomic categories",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "species",
+                "slash",
+                "issf",
+                "spuh",
+                "hybrid",
+                "domestic",
+                "form",
+                "intergrade"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "dist",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50,
+              "default": 25
+            },
+            "description": "The search radius from the given position, in kilometers."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "date",
+                "species"
+              ],
+              "default": "date"
+            },
+            "description": "Sort observations by taxonomy or by date, most recent first."
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Sort Taxonomically",
+                    "value": [
+                      {
+                        "speciesCode": "domgoo1",
+                        "comName": "Domestic goose sp. (Domestic type)",
+                        "sciName": "Anser sp. (Domestic type)",
+                        "locId": "L99381",
+                        "locName": "Stewart Park",
+                        "obsDt": "2017-08-23 08:14",
+                        "howMany": 2,
+                        "lat": 42.4613413,
+                        "lng": -76.5054578,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "cangoo",
+                        "comName": "Canada Goose",
+                        "sciName": "Branta canadensis",
+                        "locId": "L1150539",
+                        "locName": "Hanshaw Rd. fields",
+                        "obsDt": "2017-08-23 20:05",
+                        "howMany": 30,
+                        "lat": 42.4663513,
+                        "lng": -76.4531064,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "wooduc",
+                        "comName": "Wood Duck",
+                        "sciName": "Aix sponsa",
+                        "locId": "L1150931",
+                        "locName": "Danby - Bald Hill Rd/Comfort Rd/Lieb Rd block",
+                        "obsDt": "2017-08-23 19:05",
+                        "howMany": 12,
+                        "lat": 42.3361988,
+                        "lng": -76.4980173,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": true
+                      }
+                    ]
+                  },
+                  "example-1": {
+                    "summary": "Default Sort By Date",
+                    "value": [
+                      {
+                        "speciesCode": "veery",
+                        "comName": "Veery",
+                        "sciName": "Catharus fuscescens",
+                        "locId": "L1483567",
+                        "locName": "Cornell University--Libe Slope",
+                        "obsDt": "2017-08-23 22:30",
+                        "howMany": 2,
+                        "lat": 42.44786,
+                        "lng": -76.48595,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "swathr",
+                        "comName": "Swainson's Thrush",
+                        "sciName": "Catharus ustulatus",
+                        "locId": "L1483567",
+                        "locName": "Cornell University--Libe Slope",
+                        "obsDt": "2017-08-23 22:30",
+                        "howMany": 1,
+                        "lat": 42.44786,
+                        "lng": -76.48595,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      },
+                      {
+                        "speciesCode": "ovenbi1",
+                        "comName": "Ovenbird",
+                        "sciName": "Seiurus aurocapilla",
+                        "locId": "L1483567",
+                        "locName": "Cornell University--Libe Slope",
+                        "obsDt": "2017-08-23 22:30",
+                        "howMany": 3,
+                        "lat": 42.44786,
+                        "lng": -76.48595,
+                        "obsValid": true,
+                        "obsReviewed": false,
+                        "locationPrivate": false
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/geo/recent/{speciesCode}": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent nearby observations of a species",
+        "description": "Get all observations of a species, seen up to 30 days ago, at any location within a radius of up to 50 kilometers, from a given set of coordinates. Results include only the most recent observation from each location in the region specified.\n\n#### URL parameters\n\n| Name | Description |\n| ---------- | ----------- |\n| speciesCode | The eBird species code. |\n#### Notes\nThe species code is typically a 6-letter code, e.g. horlar for Horned Lark. You can get complete set of species code from the GET eBird Taxonomy end-point.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 90,
+              "minimum": -90
+            },
+            "required": true,
+            "example": 40.77
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 180,
+              "minimum": -180
+            },
+            "required": true,
+            "example": 73.96
+          },
+          {
+            "name": "speciesCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The eBird species code."
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "dist",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50,
+              "default": 25
+            },
+            "description": "The search radius from the given position, in kilometers."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/nearest/geo/recent/{speciesCode}": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Nearest observations of a species",
+        "description": "Find the nearest locations where a species has been seen recently. #### Notes The species code is typically a 6-letter code, e.g. barswa for Barn Swallow. You can get complete set of species code from the GET eBird Taxonomy end-point.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 90,
+              "minimum": -90
+            },
+            "required": true,
+            "example": 40.77
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 180,
+              "minimum": -180
+            },
+            "required": true,
+            "example": 73.96
+          },
+          {
+            "name": "speciesCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The eBird species code."
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3000,
+              "default": 3000
+            },
+            "description": "Only fetch up to this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dist",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50,
+              "default": 50
+            },
+            "description": "Only fetch observations within this distance of the provided lat/lng"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/geo/recent/notable": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent nearby notable observations",
+        "description": "Get the list of notable observations (up to 30 days ago) of birds seen at locations within a radius of up to 50 kilometers, from a given set of coordinates. Notable observations can be for locally or nationally rare species or are otherwise unusual, for example over-wintering birds in a species which is normally only a summer visitor.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 90,
+              "minimum": -90
+            },
+            "required": true,
+            "example": 40.77
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "maximum": 180,
+              "minimum": -180
+            },
+            "required": true,
+            "example": 73.96
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 14
+            },
+            "description": "The number of days back to fetch observations."
+          },
+          {
+            "in": "query",
+            "name": "detail",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "full"
+              ],
+              "default": "simple"
+            },
+            "description": "Include a subset (simple), or all (full), of the fields available."
+          },
+          {
+            "in": "query",
+            "name": "dist",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50,
+              "default": 25
+            },
+            "description": "The search radius from the given position, in kilometers."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/lists/{regionCode}": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Recent checklists feed",
+        "description": "Get information on the most recently submitted checklists for a region.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 10
+            },
+            "description": "Only fetch this number of checklists."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checklistArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/obs/{regionCode}/historic/{y}/{m}/{d}": {
+      "get": {
+        "tags": [
+          "data/obs"
+        ],
+        "summary": "Historic observations on a date",
+        "description": "Get a list of all taxa seen in a country, region or location on a specific date, with the specific observations determined by the \"rank\" parameter (defaults to latest observation on the date).\n#### Notes Responses may be cached for 30 minutes",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "m",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "required": true
+          },
+          {
+            "name": "d",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "cat",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "species",
+                "slash",
+                "issf",
+                "spuh",
+                "hybrid",
+                "domestic",
+                "form",
+                "intergrade"
+              ]
+            },
+            "description": "Only fetch observations from these taxonomic categories"
+          },
+          {
+            "in": "query",
+            "name": "detail",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "full"
+              ],
+              "default": "simple"
+            },
+            "description": "Include a subset (simple), or all (full), of the fields available."
+          },
+          {
+            "in": "query",
+            "name": "hotspot",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only fetch observations from hotspots"
+          },
+          {
+            "in": "query",
+            "name": "includeProvisional",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include observations which have not yet been reviewed."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10000
+            },
+            "description": "Only fetch this number of observations"
+          },
+          {
+            "in": "query",
+            "name": "rank",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "mrec",
+                "create"
+              ],
+              "default": "mrec"
+            },
+            "description": "Include latest observation of the day, or the first added"
+          },
+          {
+            "in": "query",
+            "name": "r",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 50
+            },
+            "description": "Fetch observations from up to 50 locations"
+          },
+          {
+            "in": "query",
+            "name": "sppLocale",
+            "description": "Use this language for species common names",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/observationArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/top100/{regionCode}/{y}/{m}/{d}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Top 100",
+        "description": "Get the top 100 contributors on a given date for a country or region.\n\n\n#### Notes\n\nThe results are updated every 15 minutes.\n\nWhen ordering by the number of completed checklists, the number of species seen will always be zero. Similarly when ordering by the number of species seen the number of completed checklists will always be zero.\n<b>Selected Response Field Notes</b>\n\nprofileHandle - if a user has enabled their profile, this is the handle to reach it via ebird.org/ebird/profile/{profileHandle}\n\nnumSpecies - always zero when checklistSort parameter is true. Invalid observations ARE included in this total\nnumCompleteChecklists - always zero when checklistSort parameter is false",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, or location code."
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "The year, from 1800 to the present."
+          },
+          {
+            "name": "m",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "required": true,
+            "description": "The month, from 1-12."
+          },
+          {
+            "name": "d",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "required": true,
+            "description": "The day in the month."
+          },
+          {
+            "in": "query",
+            "name": "rankedBy",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "spp",
+                "cl"
+              ],
+              "default": "spp"
+            },
+            "description": "Order by number of complete checklists (cl) or by number of species seen (spp)."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 100
+            },
+            "description": "Only fetch this number of contributors."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/top100"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/lists/{regionCode}/{y}/{m}/{d}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Checklist feed on a date",
+        "description": "Get information on the checklists submitted on a given date for a country or region.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The year, from 1800 to the present.",
+            "required": true
+          },
+          {
+            "name": "m",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "description": "The month, from 1-12.",
+            "required": true
+          },
+          {
+            "name": "d",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "description": "The day in the month.",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "obs_dt",
+                "creation_dt"
+              ],
+              "default": "obs_dt"
+            },
+            "description": "Order the results by the date of the checklist or by the date it was submitted."
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 10
+            },
+            "description": "Only fetch this number of checklists."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checklistArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/stats/{regionCode}/{y}/{m}/{d}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Regional statistics on a date",
+        "description": "Get a summary of the number of checklist submitted, species seen and contributors on a given date for a country or region.\n#### Notes The results are updated every 15 minutes.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country, subnational1, subnational2 or location code."
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The year, from 1800 to the present.",
+            "required": true
+          },
+          {
+            "name": "m",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "description": "The month, from 1-12.",
+            "required": true
+          },
+          {
+            "name": "d",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "description": "The day in the month.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/regionalStats"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/spplist/{regionCode}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Species List for a Region",
+        "description": "Get a list of species codes ever seen in a region, in taxonomic order (species taxa only)\n#### Notes The results are usually updated every 10 seconds for locations, every day for larger regions.",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Any location, USFWS region, subnational2, subnational1, country, or custom region code"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/checklist/view/{subId}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "View Checklist",
+        "description": "Get the details and observations of a checklist.\n#### Notes Do NOT use this to download large amounts of data. You will be banned if you do. In the fields for each observation, the following fields are duplicates or obsolete and will be removed at a future date: *howManyAtleast*, *howManyAtmost*, *hideFlags*, *projId*, *subId*, *subnational1Code* and *present*.",
+        "parameters": [
+          {
+            "name": "subId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The checklist identifier.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checklist"
+                },
+                "example": {
+                  "projId": "EBIRD",
+                  "subId": "S29893687",
+                  "protocolId": "P21",
+                  "locId": "L99381",
+                  "durationHrs": 1,
+                  "allObsReported": false,
+                  "creationDt": "2018-01-04 14:30",
+                  "lastEditedDt": "2018-01-09 18:45",
+                  "obsDt": "2018-01-04 23:29",
+                  "obsTimeValid": true,
+                  "checklistId": "CL22224",
+                  "numObservers": 1,
+                  "subnational1Code": "US-NY",
+                  "submissionMethodCode": "EBIRD_apif",
+                  "userDisplayName": "Tim Lenz",
+                  "obs": [
+                    {
+                      "speciesCode": "gwfgoo",
+                      "hideFlags": [],
+                      "obsDt": "2018-01-04 18:29",
+                      "subnational1Code": "US-NY",
+                      "howManyAtleast": 1,
+                      "howManyAtmost": 1,
+                      "howManyStr": "1",
+                      "present": false,
+                      "projId": "EBIRD",
+                      "subId": "S29893687",
+                      "obsId": "OBS406047821"
+                    },
+                    {
+                      "speciesCode": "gwfgoo2",
+                      "hideFlags": [],
+                      "obsDt": "2018-01-04 18:29",
+                      "subnational1Code": "US-NY",
+                      "howManyAtleast": 1,
+                      "howManyAtmost": 1,
+                      "howManyStr": "1",
+                      "present": false,
+                      "projId": "EBIRD",
+                      "subId": "S29893687",
+                      "obsId": "OBS406047822"
+                    },
+                    {
+                      "speciesCode": "cacgoo1",
+                      "hideFlags": [],
+                      "obsDt": "2018-01-04 18:29",
+                      "subnational1Code": "US-NY",
+                      "howManyAtleast": 1,
+                      "howManyAtmost": 1,
+                      "howManyStr": "1",
+                      "present": false,
+                      "projId": "EBIRD",
+                      "subId": "S29893687",
+                      "obsId": "OBS406047820",
+                      "obsAux": [
+                        {
+                          "subId": "S29893687",
+                          "obsId": "OBS406047820",
+                          "speciesCode": "cacgoo1",
+                          "fieldName": "breeding_code",
+                          "entryMethodCode": "ebird_breeding",
+                          "auxCode": "UN",
+                          "value": "C4"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/adjacent/{regionCode}": {
+      "get": {
+        "tags": [
+          "ref/geo"
+        ],
+        "summary": "Adjacent Regions",
+        "description": "Get the list of countries or regions that share a border with this one. #### Notes Only subnational2 codes in the United States, New Zealand, or Mexico are currently supported",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The country, subnational1 or subnational2 code.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "example": "US-CT"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Connecticut"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "code": "US-CT",
+                    "name": "Connecticut"
+                  },
+                  {
+                    "code": "US-MA",
+                    "name": "Massachusetts"
+                  },
+                  {
+                    "code": "US-NJ",
+                    "name": "New Jersey"
+                  },
+                  {
+                    "code": "US-PA",
+                    "name": "Pennsylvania"
+                  },
+                  {
+                    "code": "CA-QC",
+                    "name": "Quebec"
+                  },
+                  {
+                    "code": "US-VT",
+                    "name": "Vermont"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/hotspot/{regionCode}": {
+      "get": {
+        "tags": [
+          "ref/hotspot"
+        ],
+        "summary": "Hotspots in a region",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The country, subnational1 or subnational2 code.",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30
+            },
+            "description": "The number of days back to fetch hotspots."
+          },
+          {
+            "in": "query",
+            "name": "fmt",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "json"
+              ],
+              "default": "json"
+            },
+            "description": "Fetch the records in CSV or JSON format."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hotspotArray"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/hotspot/geo": {
+      "get": {
+        "tags": [
+          "ref/hotspot"
+        ],
+        "summary": "Nearby hotspots",
+        "description": "Get the list of hotspots, within a radius of up to 50 kilometers, from a given set of coordinates.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "required": true,
+            "example": 40.77
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": -180,
+              "maximum": 180
+            },
+            "required": true,
+            "example": 73.96
+          },
+          {
+            "in": "query",
+            "name": "back",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30
+            },
+            "description": "The number of days back to fetch hotspots."
+          },
+          {
+            "in": "query",
+            "name": "dist",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 500,
+              "default": 25
+            },
+            "description": "The search radius from the given position, in kilometers."
+          },
+          {
+            "in": "query",
+            "name": "fmt",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "json"
+              ],
+              "default": "json"
+            },
+            "description": "Fetch the records in CSV or JSON format."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hotspotArray"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/hotspot/info/{locId}": {
+      "get": {
+        "tags": [
+          "ref/hotspot"
+        ],
+        "summary": "Hotspot Info",
+        "description": "Get information on the location of a hotspot. #### Notes This API call only works for hotspots. If you pass the location code for a private location or an invalid location code then an HTTP 410 (Gone) error is returned.",
+        "parameters": [
+          {
+            "name": "locId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The location code.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/location"
+                },
+                "example": {
+                  "locId": "L99381",
+                  "name": "Stewart Park",
+                  "latitude": 42.4613413,
+                  "longitude": -76.5054578,
+                  "countryCode": "US",
+                  "countryName": "United States",
+                  "subnational1Name": "New York",
+                  "subnational1Code": "US-NY",
+                  "subnational2Code": "US-NY-109",
+                  "subnational2Name": "Tompkins",
+                  "isHotspot": true,
+                  "hierarchicalName": "Stewart Park, Tompkins, New York, US"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/taxonomy/ebird": {
+      "get": {
+        "tags": [
+          "ref/taxonomy"
+        ],
+        "summary": "eBird Taxonomy",
+        "description": "Get the taxonomy used by eBird. #### Notes Each entry in the taxonomy contains a species code for example, barswa for Barn Swallow. You can download the taxonomy for selected species using the *species* query parameter with a comma separating each code. Otherwise the full taxonomy is downloaded.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cat",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only fetch records from these taxonomic categories."
+          },
+          {
+            "in": "query",
+            "name": "fmt",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "json"
+              ],
+              "default": "csv"
+            },
+            "description": "Fetch the records in CSV or JSON format."
+          },
+          {
+            "in": "query",
+            "name": "locale",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            },
+            "description": "Use this language for common names."
+          },
+          {
+            "in": "query",
+            "name": "species",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only fetch records for these species."
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "schema": {
+              "type": "string",
+              "default": "latest"
+            },
+            "description": "Fetch a specific version of the taxonomy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "SCIENTIFIC_NAME,COMMON_NAME,SPECIES_CODE,CATEGORY,TAXON_ORDER,COM_NAME_CODES,SCI_NAME_CODES,BANDING_CODES,ORDER,FAMILY_COM_NAME,FAMILY_SCI_NAME,REPORT_AS,EXTINCT,EXTINCT_YEAR\nLarus glaucoides thayeri,Iceland Gull (Thayer's),thagul,issf,4349.0,THGU ICGU,LAGL,THGU,Charadriiformes,\"Gulls, Terns, and Skimmers\",Laridae,y00478,,\nLarus glaucoides kumlieni,Iceland Gull (kumlieni),kumgul1,issf,4352.0,THGU ICGU,LAGL,,Charadriiformes,\"Gulls, Terns, and Skimmers\",Laridae,y00478,,\n"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ebirdTaxonomy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/taxon/forms/{speciesCode}": {
+      "get": {
+        "tags": [
+          "ref/taxonomy"
+        ],
+        "summary": "Taxonomic Forms",
+        "description": "For a species, get the list of subspecies recognised in the taxonomy. The results include the species that was passed in.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "speciesCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The eBird species code.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  "cangoo4",
+                  "cangoo3",
+                  "cangoo1",
+                  "cangoo"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/taxa-locales/ebird": {
+      "get": {
+        "tags": [
+          "ref/taxonomy"
+        ],
+        "summary": "Taxa Locale Codes",
+        "description": "Returns the list of supported locale codes and names for species common names, with the last time they were updated. Use the accept-language header to get translated language names when available.\n\nNOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "example": "en"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "English"
+                      },
+                      "lastUpdated": {
+                        "type": "string",
+                        "example": "2023-10-29 12:50"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/taxonomy/versions": {
+      "get": {
+        "tags": [
+          "ref/taxonomy"
+        ],
+        "summary": "Taxonomy Versions",
+        "description": "Returns a list of all versions of the taxonomy, with a flag indicating which is the latest.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "authorityVer": {
+                        "type": "number",
+                        "example": 2017
+                      },
+                      "latest": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "authorityVer": 2017,
+                    "latest": true
+                  },
+                  {
+                    "authorityVer": 2016,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 2015,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.55,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.54,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.53,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.52,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.051,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.05,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.049,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1.048,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 1,
+                    "latest": false
+                  },
+                  {
+                    "authorityVer": 0.9,
+                    "latest": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/sppgroup/{speciesGrouping}": {
+      "get": {
+        "tags": [
+          "ref/taxonomy"
+        ],
+        "summary": "Taxonomic Groups",
+        "description": "Get the list of species groups, e.g. terns, finches, etc. #### Notes Merlin puts like birds together, with Falcons next to Hawks, whereas eBird follows taxonomic order.",
+        "parameters": [
+          {
+            "name": "speciesGrouping",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "merlin",
+                "ebird"
+              ],
+              "description": "The order in which groups are returned."
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "groupNameLocale",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            },
+            "description": "Locale for species group names. English names are returned for any non-listed locale or any non-translated group name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "groupName": {
+                        "type": "string",
+                        "example": "Waterfowl"
+                      },
+                      "groupOrder": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "taxonOrderBounds": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "number",
+                            "format": "float"
+                          }
+                        },
+                        "example": [
+                          [
+                            211,
+                            579
+                          ],
+                          [
+                            1968,
+                            2063
+                          ],
+                          [
+                            16549,
+                            16613
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "merlin",
+                    "value": [
+                      {
+                        "groupName": "Waterfowl",
+                        "groupOrder": 1,
+                        "taxonOrderBounds": [
+                          [
+                            211,
+                            579
+                          ]
+                        ]
+                      },
+                      {
+                        "groupName": "Cormorants and Anhingas",
+                        "groupOrder": 2,
+                        "taxonOrderBounds": [
+                          [
+                            1968,
+                            2063
+                          ]
+                        ]
+                      },
+                      {
+                        "groupName": "Wattle-eyes and Batises",
+                        "groupOrder": 114,
+                        "taxonOrderBounds": [
+                          [
+                            16549,
+                            16613
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "example-1": {
+                    "summary": "ebird",
+                    "value": [
+                      {
+                        "groupName": "Vultures, Hawks, and Allies",
+                        "groupOrder": 1,
+                        "taxonOrderBounds": [
+                          [
+                            2358,
+                            3042
+                          ]
+                        ]
+                      },
+                      {
+                        "groupName": "Thrushes",
+                        "groupOrder": 2,
+                        "taxonOrderBounds": [
+                          [
+                            24315,
+                            24993
+                          ]
+                        ]
+                      },
+                      {
+                        "groupName": "Catbirds, Mockingbirds, and Thrashers",
+                        "groupOrder": 3,
+                        "taxonOrderBounds": [
+                          [
+                            26353,
+                            26468.2
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/region/info/{regionCode}": {
+      "get": {
+        "tags": [
+          "ref/region"
+        ],
+        "summary": "Region Info",
+        "description": "Get information on the name and geographical area covered by a region.\n#### Notes\n\nTaking Madison County, New York, USA (location code US-NY-053) as an example\nthe various values for the regionNameFormat query parameter work as follows:\n\n| Value | Description | Result |\n| ------| ----------- | ------ |\n| detailed | return a detailed description | Madison County, New York, US |\n| detailednoqual | return the name to the subnational1 level | Madison, New York |\n| full | return the full description | Madison, New York, United States |\n| namequal | return the qualified name | Madison County |\n| nameonly | return only the name of the region | Madison |\n| revdetailed | return the detailed description in reverse | US, New York, Madison County |",
+        "parameters": [
+          {
+            "name": "regionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The major region, country, subnational1 or subnational2 code, or locId",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "regionNameFormat",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "detailed",
+                "detailednoqual",
+                "full",
+                "namequal",
+                "nameonly",
+                "revdetailed"
+              ],
+              "default": "full"
+            },
+            "description": "Control how the name is displayed."
+          },
+          {
+            "in": "query",
+            "name": "delim",
+            "schema": {
+              "type": "string",
+              "default": ", "
+            },
+            "description": "The characters used to separate elements in the name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "Madison, New York, United States"
+                    },
+                    "bounds": {
+                      "type": "object",
+                      "properties": {
+                        "minX": {
+                          "type": "number",
+                          "format": "float",
+                          "example": -75.764
+                        },
+                        "maxX": {
+                          "type": "number",
+                          "format": "float",
+                          "example": -75.764
+                        },
+                        "minY": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 42.896
+                        },
+                        "maxY": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 42.896
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Canada",
+                    "value": {
+                      "result": "Canada",
+                      "bounds": {
+                        "minX": -141.006867,
+                        "maxX": -52.618888,
+                        "minY": 41.708293,
+                        "maxY": 83.110626
+                      }
+                    }
+                  },
+                  "example-1": {
+                    "summary": "Vancouver, Detailed Format",
+                    "value": {
+                      "result": "Metro Vancouver District, British Columbia, CA",
+                      "bounds": {
+                        "minX": -123.432442,
+                        "maxX": -122.408264,
+                        "minY": 49.001183,
+                        "maxY": 49.57455
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ref/region/list/{regionType}/{parentRegionCode}": {
+      "get": {
+        "tags": [
+          "ref/region"
+        ],
+        "summary": "Sub Region List",
+        "description": "Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.",
+        "parameters": [
+          {
+            "name": "regionType",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The region type: 'country', 'subnational1' or 'subnational2'."
+          },
+          {
+            "name": "parentRegionCode",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The country or subnational1 code, or 'world'."
+          },
+          {
+            "in": "query",
+            "name": "fmt",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "json"
+              ],
+              "default": "json"
+            },
+            "description": "Fetch the records in CSV or JSON format."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "example": "US-NY"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "New York"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Counties in Nevada",
+                    "value": [
+                      {
+                        "code": "US-NV-510",
+                        "name": "Carson City"
+                      },
+                      {
+                        "code": "US-NV-001",
+                        "name": "Churchill"
+                      },
+                      {
+                        "code": "US-NV-003",
+                        "name": "Clark"
+                      },
+                      {
+                        "code": "US-NV-005",
+                        "name": "Douglas"
+                      },
+                      {
+                        "code": "US-NV-007",
+                        "name": "Elko"
+                      },
+                      {
+                        "code": "US-NV-009",
+                        "name": "Esmeralda"
+                      },
+                      {
+                        "code": "US-NV-011",
+                        "name": "Eureka"
+                      },
+                      {
+                        "code": "US-NV-013",
+                        "name": "Humboldt"
+                      },
+                      {
+                        "code": "US-NV-015",
+                        "name": "Lander"
+                      },
+                      {
+                        "code": "US-NV-017",
+                        "name": "Lincoln"
+                      },
+                      {
+                        "code": "US-NV-019",
+                        "name": "Lyon"
+                      },
+                      {
+                        "code": "US-NV-021",
+                        "name": "Mineral"
+                      },
+                      {
+                        "code": "US-NV-023",
+                        "name": "Nye"
+                      },
+                      {
+                        "code": "US-NV-027",
+                        "name": "Pershing"
+                      },
+                      {
+                        "code": "US-NV-029",
+                        "name": "Storey"
+                      },
+                      {
+                        "code": "US-NV-031",
+                        "name": "Washoe"
+                      },
+                      {
+                        "code": "US-NV-033",
+                        "name": "White Pine"
+                      }
+                    ]
+                  },
+                  "example-1": {
+                    "summary": "Countries in the World",
+                    "value": [
+                      {
+                        "code": "AF",
+                        "name": "Afghanistan"
+                      },
+                      {
+                        "code": "AL",
+                        "name": "Albania"
+                      },
+                      {
+                        "code": "DZ",
+                        "name": "Algeria"
+                      },
+                      {
+                        "code": "AS",
+                        "name": "American Samoa"
+                      },
+                      {
+                        "code": "AD",
+                        "name": "Andorra"
+                      },
+                      {
+                        "code": "AO",
+                        "name": "Angola"
+                      },
+                      {
+                        "code": "AI",
+                        "name": "Anguilla"
+                      },
+                      {
+                        "code": "AQ",
+                        "name": "Antarctica"
+                      },
+                      {
+                        "code": "AG",
+                        "name": "Antigua and Barbuda"
+                      },
+                      {
+                        "code": "AR",
+                        "name": "Argentina"
+                      },
+                      {
+                        "code": "AM",
+                        "name": "Armenia"
+                      },
+                      {
+                        "code": "AW",
+                        "name": "Aruba"
+                      },
+                      {
+                        "code": "AC",
+                        "name": "Ashmore and Cartier Islands"
+                      },
+                      {
+                        "code": "AU",
+                        "name": "Australia"
+                      },
+                      {
+                        "code": "AT",
+                        "name": "Austria"
+                      },
+                      {
+                        "code": "AZ",
+                        "name": "Azerbaijan"
+                      },
+                      {
+                        "code": "BS",
+                        "name": "Bahamas"
+                      },
+                      {
+                        "code": "BH",
+                        "name": "Bahrain"
+                      },
+                      {
+                        "code": "BD",
+                        "name": "Bangladesh"
+                      },
+                      {
+                        "code": "BB",
+                        "name": "Barbados"
+                      },
+                      {
+                        "code": "BY",
+                        "name": "Belarus"
+                      },
+                      {
+                        "code": "BE",
+                        "name": "Belgium"
+                      },
+                      {
+                        "code": "BZ",
+                        "name": "Belize"
+                      },
+                      {
+                        "code": "BJ",
+                        "name": "Benin"
+                      },
+                      {
+                        "code": "BM",
+                        "name": "Bermuda"
+                      },
+                      {
+                        "code": "BT",
+                        "name": "Bhutan"
+                      },
+                      {
+                        "code": "BO",
+                        "name": "Bolivia"
+                      },
+                      {
+                        "code": "BA",
+                        "name": "Bosnia and Herzegovina"
+                      },
+                      {
+                        "code": "BW",
+                        "name": "Botswana"
+                      },
+                      {
+                        "code": "BV",
+                        "name": "Bouvet Island"
+                      },
+                      {
+                        "code": "BR",
+                        "name": "Brazil"
+                      },
+                      {
+                        "code": "IO",
+                        "name": "British Indian Ocean Territory"
+                      },
+                      {
+                        "code": "BN",
+                        "name": "Brunei"
+                      },
+                      {
+                        "code": "BG",
+                        "name": "Bulgaria"
+                      },
+                      {
+                        "code": "BF",
+                        "name": "Burkina Faso"
+                      },
+                      {
+                        "code": "BI",
+                        "name": "Burundi"
+                      },
+                      {
+                        "code": "KH",
+                        "name": "Cambodia"
+                      },
+                      {
+                        "code": "CM",
+                        "name": "Cameroon"
+                      },
+                      {
+                        "code": "CA",
+                        "name": "Canada"
+                      },
+                      {
+                        "code": "CV",
+                        "name": "Cape Verde"
+                      },
+                      {
+                        "code": "BQ",
+                        "name": "Caribbean Netherlands"
+                      },
+                      {
+                        "code": "KY",
+                        "name": "Cayman Islands"
+                      },
+                      {
+                        "code": "CF",
+                        "name": "Central African Republic"
+                      },
+                      {
+                        "code": "TD",
+                        "name": "Chad"
+                      },
+                      {
+                        "code": "CL",
+                        "name": "Chile"
+                      },
+                      {
+                        "code": "CN",
+                        "name": "China"
+                      },
+                      {
+                        "code": "CX",
+                        "name": "Christmas Island"
+                      },
+                      {
+                        "code": "CP",
+                        "name": "Clipperton Island"
+                      },
+                      {
+                        "code": "CC",
+                        "name": "Cocos (Keeling) Islands"
+                      },
+                      {
+                        "code": "CO",
+                        "name": "Colombia"
+                      },
+                      {
+                        "code": "KM",
+                        "name": "Comoros"
+                      },
+                      {
+                        "code": "CG",
+                        "name": "Congo"
+                      },
+                      {
+                        "code": "CK",
+                        "name": "Cook Islands"
+                      },
+                      {
+                        "code": "CS",
+                        "name": "Coral Sea Islands"
+                      },
+                      {
+                        "code": "CR",
+                        "name": "Costa Rica"
+                      },
+                      {
+                        "code": "CI",
+                        "name": "C\u00f4te d'Ivoire"
+                      },
+                      {
+                        "code": "HR",
+                        "name": "Croatia"
+                      },
+                      {
+                        "code": "CU",
+                        "name": "Cuba"
+                      },
+                      {
+                        "code": "CW",
+                        "name": "Cura\u00e7ao"
+                      },
+                      {
+                        "code": "CY",
+                        "name": "Cyprus"
+                      },
+                      {
+                        "code": "CZ",
+                        "name": "Czech Republic"
+                      },
+                      {
+                        "code": "DK",
+                        "name": "Denmark"
+                      },
+                      {
+                        "code": "DJ",
+                        "name": "Djibouti"
+                      },
+                      {
+                        "code": "DM",
+                        "name": "Dominica"
+                      },
+                      {
+                        "code": "DO",
+                        "name": "Dominican Republic"
+                      },
+                      {
+                        "code": "CD",
+                        "name": "DR Congo"
+                      },
+                      {
+                        "code": "EC",
+                        "name": "Ecuador"
+                      },
+                      {
+                        "code": "EG",
+                        "name": "Egypt"
+                      },
+                      {
+                        "code": "SV",
+                        "name": "El Salvador"
+                      },
+                      {
+                        "code": "GQ",
+                        "name": "Equatorial Guinea"
+                      },
+                      {
+                        "code": "ER",
+                        "name": "Eritrea"
+                      },
+                      {
+                        "code": "EE",
+                        "name": "Estonia"
+                      },
+                      {
+                        "code": "ET",
+                        "name": "Ethiopia"
+                      },
+                      {
+                        "code": "FK",
+                        "name": "Falkland Islands (Malvinas)"
+                      },
+                      {
+                        "code": "FO",
+                        "name": "Faroe Islands"
+                      },
+                      {
+                        "code": "FJ",
+                        "name": "Fiji"
+                      },
+                      {
+                        "code": "FI",
+                        "name": "Finland"
+                      },
+                      {
+                        "code": "FR",
+                        "name": "France"
+                      },
+                      {
+                        "code": "GF",
+                        "name": "French Guiana"
+                      },
+                      {
+                        "code": "PF",
+                        "name": "French Polynesia"
+                      },
+                      {
+                        "code": "TF",
+                        "name": "French Southern and Antarctic Lands"
+                      },
+                      {
+                        "code": "GA",
+                        "name": "Gabon"
+                      },
+                      {
+                        "code": "GM",
+                        "name": "Gambia"
+                      },
+                      {
+                        "code": "GE",
+                        "name": "Georgia"
+                      },
+                      {
+                        "code": "DE",
+                        "name": "Germany"
+                      },
+                      {
+                        "code": "GH",
+                        "name": "Ghana"
+                      },
+                      {
+                        "code": "GI",
+                        "name": "Gibraltar"
+                      },
+                      {
+                        "code": "GR",
+                        "name": "Greece"
+                      },
+                      {
+                        "code": "GL",
+                        "name": "Greenland"
+                      },
+                      {
+                        "code": "GD",
+                        "name": "Grenada"
+                      },
+                      {
+                        "code": "GP",
+                        "name": "Guadeloupe"
+                      },
+                      {
+                        "code": "GU",
+                        "name": "Guam"
+                      },
+                      {
+                        "code": "GT",
+                        "name": "Guatemala"
+                      },
+                      {
+                        "code": "GG",
+                        "name": "Guernsey"
+                      },
+                      {
+                        "code": "GN",
+                        "name": "Guinea"
+                      },
+                      {
+                        "code": "GW",
+                        "name": "Guinea-Bissau"
+                      },
+                      {
+                        "code": "GY",
+                        "name": "Guyana"
+                      },
+                      {
+                        "code": "HT",
+                        "name": "Haiti"
+                      },
+                      {
+                        "code": "HM",
+                        "name": "Heard Island and McDonald Islands"
+                      },
+                      {
+                        "code": "XX",
+                        "name": "High Seas"
+                      },
+                      {
+                        "code": "HN",
+                        "name": "Honduras"
+                      },
+                      {
+                        "code": "HK",
+                        "name": "Hong Kong"
+                      },
+                      {
+                        "code": "HU",
+                        "name": "Hungary"
+                      },
+                      {
+                        "code": "IS",
+                        "name": "Iceland"
+                      },
+                      {
+                        "code": "IN",
+                        "name": "India"
+                      },
+                      {
+                        "code": "ID",
+                        "name": "Indonesia"
+                      },
+                      {
+                        "code": "IR",
+                        "name": "Iran"
+                      },
+                      {
+                        "code": "IQ",
+                        "name": "Iraq"
+                      },
+                      {
+                        "code": "IE",
+                        "name": "Ireland"
+                      },
+                      {
+                        "code": "IM",
+                        "name": "Isle of Man"
+                      },
+                      {
+                        "code": "IL",
+                        "name": "Israel"
+                      },
+                      {
+                        "code": "IT",
+                        "name": "Italy"
+                      },
+                      {
+                        "code": "JM",
+                        "name": "Jamaica"
+                      },
+                      {
+                        "code": "JP",
+                        "name": "Japan"
+                      },
+                      {
+                        "code": "JE",
+                        "name": "Jersey"
+                      },
+                      {
+                        "code": "JO",
+                        "name": "Jordan"
+                      },
+                      {
+                        "code": "KZ",
+                        "name": "Kazakhstan"
+                      },
+                      {
+                        "code": "KE",
+                        "name": "Kenya"
+                      },
+                      {
+                        "code": "KI",
+                        "name": "Kiribati"
+                      },
+                      {
+                        "code": "XK",
+                        "name": "Kosovo"
+                      },
+                      {
+                        "code": "KW",
+                        "name": "Kuwait"
+                      },
+                      {
+                        "code": "KG",
+                        "name": "Kyrgyzstan"
+                      },
+                      {
+                        "code": "LA",
+                        "name": "Laos"
+                      },
+                      {
+                        "code": "LV",
+                        "name": "Latvia"
+                      },
+                      {
+                        "code": "LB",
+                        "name": "Lebanon"
+                      },
+                      {
+                        "code": "LS",
+                        "name": "Lesotho"
+                      },
+                      {
+                        "code": "LR",
+                        "name": "Liberia"
+                      },
+                      {
+                        "code": "LY",
+                        "name": "Libya"
+                      },
+                      {
+                        "code": "LI",
+                        "name": "Liechtenstein"
+                      },
+                      {
+                        "code": "LT",
+                        "name": "Lithuania"
+                      },
+                      {
+                        "code": "LU",
+                        "name": "Luxembourg"
+                      },
+                      {
+                        "code": "MO",
+                        "name": "Macau"
+                      },
+                      {
+                        "code": "MK",
+                        "name": "Macedonia"
+                      },
+                      {
+                        "code": "MG",
+                        "name": "Madagascar"
+                      },
+                      {
+                        "code": "MW",
+                        "name": "Malawi"
+                      },
+                      {
+                        "code": "MY",
+                        "name": "Malaysia"
+                      },
+                      {
+                        "code": "MV",
+                        "name": "Maldives"
+                      },
+                      {
+                        "code": "ML",
+                        "name": "Mali"
+                      },
+                      {
+                        "code": "MT",
+                        "name": "Malta"
+                      },
+                      {
+                        "code": "MH",
+                        "name": "Marshall Islands"
+                      },
+                      {
+                        "code": "MQ",
+                        "name": "Martinique"
+                      },
+                      {
+                        "code": "MR",
+                        "name": "Mauritania"
+                      },
+                      {
+                        "code": "MU",
+                        "name": "Mauritius"
+                      },
+                      {
+                        "code": "YT",
+                        "name": "Mayotte"
+                      },
+                      {
+                        "code": "MX",
+                        "name": "Mexico"
+                      },
+                      {
+                        "code": "FM",
+                        "name": "Micronesia"
+                      },
+                      {
+                        "code": "MD",
+                        "name": "Moldova"
+                      },
+                      {
+                        "code": "MC",
+                        "name": "Monaco"
+                      },
+                      {
+                        "code": "MN",
+                        "name": "Mongolia"
+                      },
+                      {
+                        "code": "ME",
+                        "name": "Montenegro"
+                      },
+                      {
+                        "code": "MS",
+                        "name": "Montserrat"
+                      },
+                      {
+                        "code": "MA",
+                        "name": "Morocco"
+                      },
+                      {
+                        "code": "MZ",
+                        "name": "Mozambique"
+                      },
+                      {
+                        "code": "MM",
+                        "name": "Myanmar"
+                      },
+                      {
+                        "code": "NA",
+                        "name": "Namibia"
+                      },
+                      {
+                        "code": "NR",
+                        "name": "Nauru"
+                      },
+                      {
+                        "code": "NP",
+                        "name": "Nepal"
+                      },
+                      {
+                        "code": "NL",
+                        "name": "Netherlands"
+                      },
+                      {
+                        "code": "NC",
+                        "name": "New Caledonia"
+                      },
+                      {
+                        "code": "NZ",
+                        "name": "New Zealand"
+                      },
+                      {
+                        "code": "NI",
+                        "name": "Nicaragua"
+                      },
+                      {
+                        "code": "NE",
+                        "name": "Niger"
+                      },
+                      {
+                        "code": "NG",
+                        "name": "Nigeria"
+                      },
+                      {
+                        "code": "NU",
+                        "name": "Niue"
+                      },
+                      {
+                        "code": "NF",
+                        "name": "Norfolk Island"
+                      },
+                      {
+                        "code": "MP",
+                        "name": "Northern Mariana Islands"
+                      },
+                      {
+                        "code": "KP",
+                        "name": "North Korea"
+                      },
+                      {
+                        "code": "NO",
+                        "name": "Norway"
+                      },
+                      {
+                        "code": "OM",
+                        "name": "Oman"
+                      },
+                      {
+                        "code": "PK",
+                        "name": "Pakistan"
+                      },
+                      {
+                        "code": "PW",
+                        "name": "Palau"
+                      },
+                      {
+                        "code": "PS",
+                        "name": "Palestinian Territory"
+                      },
+                      {
+                        "code": "PA",
+                        "name": "Panama"
+                      },
+                      {
+                        "code": "PG",
+                        "name": "Papua New Guinea"
+                      },
+                      {
+                        "code": "PY",
+                        "name": "Paraguay"
+                      },
+                      {
+                        "code": "PE",
+                        "name": "Peru"
+                      },
+                      {
+                        "code": "PH",
+                        "name": "Philippines"
+                      },
+                      {
+                        "code": "PN",
+                        "name": "Pitcairn Islands"
+                      },
+                      {
+                        "code": "PL",
+                        "name": "Poland"
+                      },
+                      {
+                        "code": "PT",
+                        "name": "Portugal"
+                      },
+                      {
+                        "code": "PR",
+                        "name": "Puerto Rico"
+                      },
+                      {
+                        "code": "QA",
+                        "name": "Qatar"
+                      },
+                      {
+                        "code": "RE",
+                        "name": "R\u00e9union"
+                      },
+                      {
+                        "code": "RO",
+                        "name": "Romania"
+                      },
+                      {
+                        "code": "RU",
+                        "name": "Russia"
+                      },
+                      {
+                        "code": "RW",
+                        "name": "Rwanda"
+                      },
+                      {
+                        "code": "BL",
+                        "name": "Saint Barth\u00e9lemy"
+                      },
+                      {
+                        "code": "SH",
+                        "name": "Saint Helena, Ascension, and Tristan da Cunha"
+                      },
+                      {
+                        "code": "KN",
+                        "name": "Saint Kitts and Nevis"
+                      },
+                      {
+                        "code": "LC",
+                        "name": "Saint Lucia"
+                      },
+                      {
+                        "code": "MF",
+                        "name": "Saint Martin (French part)"
+                      },
+                      {
+                        "code": "PM",
+                        "name": "Saint Pierre and Miquelon"
+                      },
+                      {
+                        "code": "VC",
+                        "name": "Saint Vincent and the Grenadines"
+                      },
+                      {
+                        "code": "WS",
+                        "name": "Samoa"
+                      },
+                      {
+                        "code": "SM",
+                        "name": "San Marino"
+                      },
+                      {
+                        "code": "ST",
+                        "name": "S\u00e3o Tom\u00e9 and Pr\u00edncipe"
+                      },
+                      {
+                        "code": "SA",
+                        "name": "Saudi Arabia"
+                      },
+                      {
+                        "code": "SN",
+                        "name": "Senegal"
+                      },
+                      {
+                        "code": "RS",
+                        "name": "Serbia"
+                      },
+                      {
+                        "code": "SC",
+                        "name": "Seychelles"
+                      },
+                      {
+                        "code": "SL",
+                        "name": "Sierra Leone"
+                      },
+                      {
+                        "code": "SG",
+                        "name": "Singapore"
+                      },
+                      {
+                        "code": "SX",
+                        "name": "Sint Maarten"
+                      },
+                      {
+                        "code": "SK",
+                        "name": "Slovakia"
+                      },
+                      {
+                        "code": "SI",
+                        "name": "Slovenia"
+                      },
+                      {
+                        "code": "SB",
+                        "name": "Solomon Islands"
+                      },
+                      {
+                        "code": "SO",
+                        "name": "Somalia"
+                      },
+                      {
+                        "code": "ZA",
+                        "name": "South Africa"
+                      },
+                      {
+                        "code": "GS",
+                        "name": "South Georgia and South Sandwich Islands"
+                      },
+                      {
+                        "code": "KR",
+                        "name": "South Korea"
+                      },
+                      {
+                        "code": "SS",
+                        "name": "South Sudan"
+                      },
+                      {
+                        "code": "ES",
+                        "name": "Spain"
+                      },
+                      {
+                        "code": "LK",
+                        "name": "Sri Lanka"
+                      },
+                      {
+                        "code": "SD",
+                        "name": "Sudan"
+                      },
+                      {
+                        "code": "SR",
+                        "name": "Suriname"
+                      },
+                      {
+                        "code": "SJ",
+                        "name": "Svalbard"
+                      },
+                      {
+                        "code": "SZ",
+                        "name": "Swaziland"
+                      },
+                      {
+                        "code": "SE",
+                        "name": "Sweden"
+                      },
+                      {
+                        "code": "CH",
+                        "name": "Switzerland"
+                      },
+                      {
+                        "code": "SY",
+                        "name": "Syria"
+                      },
+                      {
+                        "code": "TW",
+                        "name": "Taiwan"
+                      },
+                      {
+                        "code": "TJ",
+                        "name": "Tajikistan"
+                      },
+                      {
+                        "code": "TZ",
+                        "name": "Tanzania"
+                      },
+                      {
+                        "code": "TH",
+                        "name": "Thailand"
+                      },
+                      {
+                        "code": "TL",
+                        "name": "Timor-Leste"
+                      },
+                      {
+                        "code": "TG",
+                        "name": "Togo"
+                      },
+                      {
+                        "code": "TK",
+                        "name": "Tokelau"
+                      },
+                      {
+                        "code": "TO",
+                        "name": "Tonga"
+                      },
+                      {
+                        "code": "TT",
+                        "name": "Trinidad and Tobago"
+                      },
+                      {
+                        "code": "TN",
+                        "name": "Tunisia"
+                      },
+                      {
+                        "code": "TR",
+                        "name": "Turkey"
+                      },
+                      {
+                        "code": "TM",
+                        "name": "Turkmenistan"
+                      },
+                      {
+                        "code": "TC",
+                        "name": "Turks and Caicos Islands"
+                      },
+                      {
+                        "code": "TV",
+                        "name": "Tuvalu"
+                      },
+                      {
+                        "code": "UG",
+                        "name": "Uganda"
+                      },
+                      {
+                        "code": "UA",
+                        "name": "Ukraine"
+                      },
+                      {
+                        "code": "AE",
+                        "name": "United Arab Emirates"
+                      },
+                      {
+                        "code": "GB",
+                        "name": "United Kingdom"
+                      },
+                      {
+                        "code": "US",
+                        "name": "United States"
+                      },
+                      {
+                        "code": "UM",
+                        "name": "United States Minor Outlying Islands"
+                      },
+                      {
+                        "code": "UY",
+                        "name": "Uruguay"
+                      },
+                      {
+                        "code": "UZ",
+                        "name": "Uzbekistan"
+                      },
+                      {
+                        "code": "VU",
+                        "name": "Vanuatu"
+                      },
+                      {
+                        "code": "VA",
+                        "name": "Vatican City (Holy See)"
+                      },
+                      {
+                        "code": "VE",
+                        "name": "Venezuela"
+                      },
+                      {
+                        "code": "VN",
+                        "name": "Vietnam"
+                      },
+                      {
+                        "code": "VG",
+                        "name": "Virgin Islands (British)"
+                      },
+                      {
+                        "code": "VI",
+                        "name": "Virgin Islands (U.S.)"
+                      },
+                      {
+                        "code": "WF",
+                        "name": "Wallis and Futuna"
+                      },
+                      {
+                        "code": "EH",
+                        "name": "Western Sahara"
+                      },
+                      {
+                        "code": "YE",
+                        "name": "Yemen"
+                      },
+                      {
+                        "code": "ZM",
+                        "name": "Zambia"
+                      },
+                      {
+                        "code": "ZW",
+                        "name": "Zimbabwe"
+                      }
+                    ]
+                  },
+                  "example-2": {
+                    "summary": "States in US",
+                    "value": [
+                      {
+                        "code": "US-AL",
+                        "name": "Alabama"
+                      },
+                      {
+                        "code": "US-AK",
+                        "name": "Alaska"
+                      },
+                      {
+                        "code": "US-AZ",
+                        "name": "Arizona"
+                      },
+                      {
+                        "code": "US-AR",
+                        "name": "Arkansas"
+                      },
+                      {
+                        "code": "US-CA",
+                        "name": "California"
+                      },
+                      {
+                        "code": "US-CO",
+                        "name": "Colorado"
+                      },
+                      {
+                        "code": "US-CT",
+                        "name": "Connecticut"
+                      },
+                      {
+                        "code": "US-DE",
+                        "name": "Delaware"
+                      },
+                      {
+                        "code": "US-DC",
+                        "name": "District of Columbia"
+                      },
+                      {
+                        "code": "US-FL",
+                        "name": "Florida"
+                      },
+                      {
+                        "code": "US-GA",
+                        "name": "Georgia"
+                      },
+                      {
+                        "code": "US-HI",
+                        "name": "Hawaii"
+                      },
+                      {
+                        "code": "US-ID",
+                        "name": "Idaho"
+                      },
+                      {
+                        "code": "US-IL",
+                        "name": "Illinois"
+                      },
+                      {
+                        "code": "US-IN",
+                        "name": "Indiana"
+                      },
+                      {
+                        "code": "US-IA",
+                        "name": "Iowa"
+                      },
+                      {
+                        "code": "US-KS",
+                        "name": "Kansas"
+                      },
+                      {
+                        "code": "US-KY",
+                        "name": "Kentucky"
+                      },
+                      {
+                        "code": "US-LA",
+                        "name": "Louisiana"
+                      },
+                      {
+                        "code": "US-ME",
+                        "name": "Maine"
+                      },
+                      {
+                        "code": "US-MD",
+                        "name": "Maryland"
+                      },
+                      {
+                        "code": "US-MA",
+                        "name": "Massachusetts"
+                      },
+                      {
+                        "code": "US-MI",
+                        "name": "Michigan"
+                      },
+                      {
+                        "code": "US-MN",
+                        "name": "Minnesota"
+                      },
+                      {
+                        "code": "US-MS",
+                        "name": "Mississippi"
+                      },
+                      {
+                        "code": "US-MO",
+                        "name": "Missouri"
+                      },
+                      {
+                        "code": "US-MT",
+                        "name": "Montana"
+                      },
+                      {
+                        "code": "US-NE",
+                        "name": "Nebraska"
+                      },
+                      {
+                        "code": "US-NV",
+                        "name": "Nevada"
+                      },
+                      {
+                        "code": "US-NH",
+                        "name": "New Hampshire"
+                      },
+                      {
+                        "code": "US-NJ",
+                        "name": "New Jersey"
+                      },
+                      {
+                        "code": "US-NM",
+                        "name": "New Mexico"
+                      },
+                      {
+                        "code": "US-NY",
+                        "name": "New York"
+                      },
+                      {
+                        "code": "US-NC",
+                        "name": "North Carolina"
+                      },
+                      {
+                        "code": "US-ND",
+                        "name": "North Dakota"
+                      },
+                      {
+                        "code": "US-OH",
+                        "name": "Ohio"
+                      },
+                      {
+                        "code": "US-OK",
+                        "name": "Oklahoma"
+                      },
+                      {
+                        "code": "US-OR",
+                        "name": "Oregon"
+                      },
+                      {
+                        "code": "US-PA",
+                        "name": "Pennsylvania"
+                      },
+                      {
+                        "code": "US-RI",
+                        "name": "Rhode Island"
+                      },
+                      {
+                        "code": "US-SC",
+                        "name": "South Carolina"
+                      },
+                      {
+                        "code": "US-SD",
+                        "name": "South Dakota"
+                      },
+                      {
+                        "code": "US-TN",
+                        "name": "Tennessee"
+                      },
+                      {
+                        "code": "US-TX",
+                        "name": "Texas"
+                      },
+                      {
+                        "code": "US-UT",
+                        "name": "Utah"
+                      },
+                      {
+                        "code": "US-VT",
+                        "name": "Vermont"
+                      },
+                      {
+                        "code": "US-VA",
+                        "name": "Virginia"
+                      },
+                      {
+                        "code": "US-WA",
+                        "name": "Washington"
+                      },
+                      {
+                        "code": "US-WV",
+                        "name": "West Virginia"
+                      },
+                      {
+                        "code": "US-WI",
+                        "name": "Wisconsin"
+                      },
+                      {
+                        "code": "US-WY",
+                        "name": "Wyoming"
+                      }
+                    ]
+                  },
+                  "example-3": {
+                    "summary": "Counties in New Zealand",
+                    "value": [
+                      {
+                        "code": "NZ-CAN-063",
+                        "name": "Ashburton District"
+                      },
+                      {
+                        "code": "NZ-AUK-007",
+                        "name": "Auckland City"
+                      },
+                      {
+                        "code": "NZ-WTC-055",
+                        "name": "Buller District"
+                      },
+                      {
+                        "code": "NZ-WGN-049",
+                        "name": "Carterton District"
+                      },
+                      {
+                        "code": "NZ-HKB-032",
+                        "name": "Central Hawke's Bay District"
+                      },
+                      {
+                        "code": "NZ-OTA-069",
+                        "name": "Central Otago District"
+                      },
+                      {
+                        "code": "NZ-CAN-060",
+                        "name": "Christchurch City"
+                      },
+                      {
+                        "code": "NZ-OTA-072",
+                        "name": "Clutha District"
+                      },
+                      {
+                        "code": "NZ-OTA-071",
+                        "name": "Dunedin City"
+                      },
+                      {
+                        "code": "NZ-NTL-001",
+                        "name": "Far North District"
+                      },
+                      {
+                        "code": "NZ-AUK-010",
+                        "name": "Franklin District"
+                      },
+                      {
+                        "code": "NZ-WKO-010",
+                        "name": "Franklin District"
+                      },
+                      {
+                        "code": "NZ-GIS-028",
+                        "name": "Gisborne District"
+                      },
+                      {
+                        "code": "NZ-STL-074",
+                        "name": "Gore District"
+                      },
+                      {
+                        "code": "NZ-WTC-056",
+                        "name": "Grey District"
+                      },
+                      {
+                        "code": "NZ-WKO-016",
+                        "name": "Hamilton City"
+                      },
+                      {
+                        "code": "NZ-HKB-030",
+                        "name": "Hastings District"
+                      },
+                      {
+                        "code": "NZ-WKO-012",
+                        "name": "Hauraki District"
+                      },
+                      {
+                        "code": "NZ-MWT-042",
+                        "name": "Horowhenua District"
+                      },
+                      {
+                        "code": "NZ-CAN-058",
+                        "name": "Hurunui District"
+                      },
+                      {
+                        "code": "NZ-STL-075",
+                        "name": "Invercargill City"
+                      },
+                      {
+                        "code": "NZ-CAN-054",
+                        "name": "Kaikoura District"
+                      },
+                      {
+                        "code": "NZ-NTL-003",
+                        "name": "Kaipara District"
+                      },
+                      {
+                        "code": "NZ-WGN-043",
+                        "name": "Kapiti Coast District"
+                      },
+                      {
+                        "code": "NZ-BOP-026",
+                        "name": "Kawerau District"
+                      },
+                      {
+                        "code": "NZ-WGN-046",
+                        "name": "Lower Hutt City"
+                      },
+                      {
+                        "code": "NZ-CAN-065",
+                        "name": "Mackenzie District"
+                      },
+                      {
+                        "code": "NZ-MWT-039",
+                        "name": "Manawatu District"
+                      },
+                      {
+                        "code": "NZ-AUK-008",
+                        "name": "Manukau City"
+                      },
+                      {
+                        "code": "NZ-MBH-053",
+                        "name": "Marlborough District"
+                      },
+                      {
+                        "code": "NZ-WGN-048",
+                        "name": "Masterton District"
+                      },
+                      {
+                        "code": "NZ-WKO-015",
+                        "name": "Matamata-Piako District"
+                      },
+                      {
+                        "code": "NZ-HKB-031",
+                        "name": "Napier City"
+                      },
+                      {
+                        "code": "NZ-NSN-052",
+                        "name": "Nelson City"
+                      },
+                      {
+                        "code": "NZ-TKI-033",
+                        "name": "New Plymouth District"
+                      },
+                      {
+                        "code": "NZ-AUK-005",
+                        "name": "North Shore City"
+                      },
+                      {
+                        "code": "NZ-BOP-027",
+                        "name": "Opotiki District"
+                      },
+                      {
+                        "code": "NZ-WKO-018",
+                        "name": "Otorohanga District"
+                      },
+                      {
+                        "code": "NZ-MWT-040",
+                        "name": "Palmerston North City"
+                      },
+                      {
+                        "code": "NZ-AUK-009",
+                        "name": "Papakura District"
+                      },
+                      {
+                        "code": "NZ-WGN-044",
+                        "name": "Porirua City"
+                      },
+                      {
+                        "code": "NZ-OTA-070",
+                        "name": "Queenstown-Lakes District"
+                      },
+                      {
+                        "code": "NZ-HKB-038",
+                        "name": "Rangitikei District"
+                      },
+                      {
+                        "code": "NZ-MWT-038",
+                        "name": "Rangitikei District"
+                      },
+                      {
+                        "code": "NZ-AUK-004",
+                        "name": "Rodney District"
+                      },
+                      {
+                        "code": "NZ-WKO-024",
+                        "name": "Rotorua District"
+                      },
+                      {
+                        "code": "NZ-BOP-024",
+                        "name": "Rotorua District"
+                      },
+                      {
+                        "code": "NZ-MWT-036",
+                        "name": "Ruapehu District"
+                      },
+                      {
+                        "code": "NZ-CAN-062",
+                        "name": "Selwyn District"
+                      },
+                      {
+                        "code": "NZ-TKI-035",
+                        "name": "South Taranaki District"
+                      },
+                      {
+                        "code": "NZ-WKO-019",
+                        "name": "South Waikato District"
+                      },
+                      {
+                        "code": "NZ-WGN-050",
+                        "name": "South Wairarapa District"
+                      },
+                      {
+                        "code": "NZ-STL-073",
+                        "name": "Southland District"
+                      },
+                      {
+                        "code": "NZ-MWT-034",
+                        "name": "Stratford District"
+                      },
+                      {
+                        "code": "NZ-TKI-034",
+                        "name": "Stratford District"
+                      },
+                      {
+                        "code": "NZ-WGN-041",
+                        "name": "Tararua District"
+                      },
+                      {
+                        "code": "NZ-MWT-041",
+                        "name": "Tararua District"
+                      },
+                      {
+                        "code": "NZ-TAS-051",
+                        "name": "Tasman District"
+                      },
+                      {
+                        "code": "NZ-WKO-021",
+                        "name": "Taupo District"
+                      },
+                      {
+                        "code": "NZ-HKB-021",
+                        "name": "Taupo District"
+                      },
+                      {
+                        "code": "NZ-MWT-021",
+                        "name": "Taupo District"
+                      },
+                      {
+                        "code": "NZ-BOP-021",
+                        "name": "Taupo District"
+                      },
+                      {
+                        "code": "NZ-BOP-023",
+                        "name": "Tauranga City"
+                      },
+                      {
+                        "code": "NZ-WKO-011",
+                        "name": "Thames-Coromandel District"
+                      },
+                      {
+                        "code": "NZ-CAN-064",
+                        "name": "Timaru District"
+                      },
+                      {
+                        "code": "NZ-WGN-045",
+                        "name": "Upper Hutt City"
+                      },
+                      {
+                        "code": "NZ-WKO-013",
+                        "name": "Waikato District"
+                      },
+                      {
+                        "code": "NZ-CAN-059",
+                        "name": "Waimakariri District"
+                      },
+                      {
+                        "code": "NZ-CAN-066",
+                        "name": "Waimate District"
+                      },
+                      {
+                        "code": "NZ-WKO-017",
+                        "name": "Waipa District"
+                      },
+                      {
+                        "code": "NZ-HKB-029",
+                        "name": "Wairoa District"
+                      },
+                      {
+                        "code": "NZ-AUK-006",
+                        "name": "Waitakere City"
+                      },
+                      {
+                        "code": "NZ-OTA-068",
+                        "name": "Waitaki District"
+                      },
+                      {
+                        "code": "NZ-CAN-068",
+                        "name": "Waitaki District"
+                      },
+                      {
+                        "code": "NZ-WKO-020",
+                        "name": "Waitomo District"
+                      },
+                      {
+                        "code": "NZ-MWT-020",
+                        "name": "Waitomo District"
+                      },
+                      {
+                        "code": "NZ-MWT-037",
+                        "name": "Wanganui District"
+                      },
+                      {
+                        "code": "NZ-WGN-047",
+                        "name": "Wellington City"
+                      },
+                      {
+                        "code": "NZ-BOP-022",
+                        "name": "Western Bay of Plenty District"
+                      },
+                      {
+                        "code": "NZ-WTC-057",
+                        "name": "Westland District"
+                      },
+                      {
+                        "code": "NZ-BOP-025",
+                        "name": "Whakatane District"
+                      },
+                      {
+                        "code": "NZ-NTL-002",
+                        "name": "Whangarei District"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

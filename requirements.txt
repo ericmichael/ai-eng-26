@@ -1,0 +1,7 @@
+# Core dependencies
+openai-agents>=0.0.1
+ipywidgets>=7.6.0
+notebook>=7.0.0
+
+# Linux VM widget
+anywidget>=0.9.0
