@@ -1,7 +1,7 @@
 --extra-index-url https://pypi.fury.io/ericmichael/
 
 # Core dependencies
-omniagents>=0.5.5
+omniagents["all"]>=0.6.0
 openai-agents>=0.0.1
 ipywidgets>=7.6.0
 notebook>=7.0.0
