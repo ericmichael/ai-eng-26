@@ -1,0 +1,38 @@
+# IMDB dataset
+aclImdb/
+aclImdb_v1.tar.gz
+
+# SMS Spam dataset
+sms_spam_collection/
+sms_spam_collection.zip
+
+# Model weights
+Qwen3-0.6B/
+gpt2/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.db
+*.wav
+*.zip
