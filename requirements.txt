@@ -1,7 +1,17 @@
+--extra-index-url https://pypi.fury.io/ericmichael/
+
 # Core dependencies
+omniagents>=0.5.5
 openai-agents>=0.0.1
 ipywidgets>=7.6.0
 notebook>=7.0.0
+jupyterlab>=4.1.2
+jupyterlab-rise
 
 # Linux VM widget
 anywidget>=0.9.0
+
+# Docker sandbox
+docker>=7.0.0
+aiohttp>=3.9.0
+pillow>=10.0.0
